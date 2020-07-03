@@ -1,5 +1,8 @@
 def flatten_iterable(to_flatten):
-    """ Flatten nested lists and tuples into a non-nested list recursively. """
+    """ 
+    Flatten nested lists and tuples into a non-nested list recursively. 
+    Always returns a non-nested list, even if the input was erroneously not a list/tuple. 
+    """
     res = list()
     def is_list_or_tuple(elem):
         return isinstance(elem, list) or isinstance(elem, tuple) 

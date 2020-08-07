@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import re
 
 def split_sentences(in_str):
@@ -24,7 +23,8 @@ def split_sentences(in_str):
 
 def relist(re_str, in_list):
     """
-    Filters a list using a regex pattern.
+    Filters a list using a regex pattern. 
+    Elements that weren't completely rejected go in the new list.
     
     Args:
         re_str {string}             -- regex pattern to be compiled

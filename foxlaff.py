@@ -2,10 +2,10 @@ import os
 
 def load_all_from_folder(folder):
     """
-    Get all file names from folder, and simply return it
+    Get all absolute file names from folder, and simply return it
     as a list of strings.
     For example, use this to load images from a folder.
-
+    
     Parameters:
     path_to_folder {str} -- string path to parent folder
     

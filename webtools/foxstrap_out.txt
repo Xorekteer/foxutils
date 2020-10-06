@@ -1,0 +1,74 @@
+<form method="POST" action="">
+	{{form.hidden_tag()}}
+	<div class="row">
+		<div class=col>
+			{{form.username.label}}
+		</div>
+		<div class=col>
+			{{form.username}}
+		</div>
+	</div>
+	<div class="row">
+		<div class=col>
+			{{form.password.label}}
+		</div>
+		<div class=col>
+			{{form.password}}
+		</div>
+	</div>
+	<div class="row">
+		<div class=col>
+			{{form.confirm_password.label}}
+		</div>
+		<div class=col>
+			{{form.confirm_password}}
+		</div>
+	</div>
+	<div class="row">
+		<div class=col>
+			{{form.email.label}}
+		</div>
+		<div class=col>
+			{{form.email}}
+		</div>
+	</div>
+	<div class=container style="float:left;">
+		{{ form.submit }}
+	</div>
+</form>
+<!-- Errors in username  -->
+{% if form.username.errors %}
+    <span> Errors in username: </span> <br>
+    {% for error in form.username.errors %}
+        <div class="alert alert-secondary">
+            {{error}}
+        </div>
+    {% endfor %}
+{% endif %}
+<!-- Errors in password  -->
+{% if form.username.errors %}
+    <span> Errors in password: </span> <br>
+    {% for error in form.password.errors %}
+        <div class="alert alert-secondary">
+            {{error}}
+        </div>
+    {% endfor %}
+{% endif %}
+<!-- Errors in confirm_password  -->
+{% if form.username.errors %}
+    <span> Errors in confirm_password: </span> <br>
+    {% for error in form.confirm_password.errors %}
+        <div class="alert alert-secondary">
+            {{error}}
+        </div>
+    {% endfor %}
+{% endif %}
+<!-- Errors in email  -->
+{% if form.username.errors %}
+    <span> Errors in email: </span> <br>
+    {% for error in form.email.errors %}
+        <div class="alert alert-secondary">
+            {{error}}
+        </div>
+    {% endfor %}
+{% endif %}

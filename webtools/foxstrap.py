@@ -1,5 +1,11 @@
-import foxtag
-import foxtrix
+if False:   # VS code linting trick
+    import foxtag
+    import foxtrix
+    
+# actual imports
+import x_foxport
+import foxutils.webtools.foxtag  as foxtag
+import foxutils.webtools.foxtrix as foxtrix
 
 outfile_path = "foxstrap_out.txt"
 infile_path  = "foxstrap_in.txt"
@@ -81,6 +87,8 @@ def boot_form(form_name='form'):
     with open(outfile_path, 'w') as outfile:    
         outfile.write(foxtag.write_from_top())
         outfile.write("".join(err_str_list))
+
+
 
 
         

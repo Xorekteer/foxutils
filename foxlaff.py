@@ -1,5 +1,11 @@
 import os
 
+verbose = False
+def vprint(*args, **kwargs):
+    if verbose:
+        print(*args, **kwargs)
+
+
 def load_all_from_folder(folder):
     """
     Get all absolute file names from folder, and simply return it
@@ -16,3 +22,51 @@ def load_all_from_folder(folder):
     rel_files = os.listdir(folder)    
     # Convert to full file names
     return [os.path.join(folder, fname) for fname in rel_files]
+
+
+def folder_recursion(current_root, storage_list, include_root=True):
+    """
+    Fills storage_list with the absolute paths of folders traversed down recursively from current_root.
+    Folders starting with . or _ are ignored.
+
+    Params:
+    current_root {str}        --  root of folders to be traversed
+    storage_list {list}       --  list to be filled with the absolute folder paths... can be empty
+    include_root=True {bool}  --  should root be written to the list?
+
+    Return:
+    None
+
+    Usage:
+    lst = list()
+    folder_recursion(some_path, lst)
+    """
+    # append root if necessary
+    vprint(f"Current root: {current_root}")
+    if include_root:
+        storage_list.append(current_root)
+    # list of absolute paths of subdirectories in current root
+    # ignorres folders starting with . (hidden) and _ (such as __pycache__)
+    abs_subdirs_now = [
+        os.path.join(current_root, rel_subdir) for rel_subdir in os.listdir(current_root) 
+        if os.path.isdir(os.path.join(current_root, rel_subdir)) and rel_subdir[0] not in '._' and rel_subdir != "venv"
+        ]
+    vprint(f"\nSubdirs now:\n{abs_subdirs_now}\n")
+    for abs_subdir in abs_subdirs_now:
+        storage_list.append(abs_subdir)
+        folder_recursion(abs_subdir, storage_list, include_root=False)
+
+def list_subfolders_recursively(root, include_root=True):
+    """
+    Returns a list of all subfolders obtained recursively.
+    
+    This function is just a wrapper around folder_recursion to allow simple x=fun(y) usage.
+
+    Params:
+    root {str}                  --  path of top level folder
+    include_root=True {bool}    --  should root be written to the list?
+    """
+    lst = list()
+    folder_recursion(root, lst, include_root=include_root)
+    return lst
+

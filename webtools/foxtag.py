@@ -1,8 +1,9 @@
-import sys
-sys.path.append("/home/xorekteer/Desktop/Git/foxlibs/imp/libs")
-sys.path.append("/home/xorekteer/Desktop/Git/foxlibs/imp/scripts")
-sys.path.append("/home/xorekteer/Desktop/Git/foxlibs/imp/scripts_c")
+if False:   # VS code linting trick
+    import sys
+    sys.path.append('..')
+    import foxcast
 
+import x_foxport
 import foxutils.foxcast as foxcast
 
 

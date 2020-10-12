@@ -21,7 +21,8 @@ def boot_table():
     in_array = foxtrix.extract(infile_path)     # get input in array form from txt
                                                 # can be dereferenced using in_array[row_index][col_index]
     
-    root = foxtag.Elem(tag='div', attrs='class="container", style="float:left;"')
+    doc = foxtag.Document()
+    root = foxtag.Elem(tag='div', attrs='class="container", style="float:left;"', document=doc)
     for row_index in range(len(in_array)):
         row_child = root.add_child(tag='div', attrs='class="row"')
         
@@ -34,7 +35,7 @@ def boot_table():
             row_child.add_child(tag='div', attrs='class="col"', inner_html=inner_html)
             
     with open(outfile_path, 'w') as outfile:    
-        outfile.write(foxtag.write_from_top())
+        outfile.write(doc.write_from_top())
         
 
 def boot_form(form_name='form'):
@@ -49,8 +50,10 @@ def boot_form(form_name='form'):
     in_array = foxtrix.extract(infile_path)     # get input in array form from txt
                                                 # can be dereferenced using in_array[row_index][col_index]
     
+    doc = foxtag.Document()
+    
     # outer <form>
-    root = foxtag.Elem(tag='form', attrs='method="POST" action=""')
+    root = foxtag.Elem(tag='form', attrs='method="POST" action=""', document=doc)
     # starting hidden_tag
     root.inner_html = r"{{form.hidden_tag()}}"
     # repetitive rows/cols
@@ -85,7 +88,7 @@ def boot_form(form_name='form'):
         err_str_list.append(err_str)
 
     with open(outfile_path, 'w') as outfile:    
-        outfile.write(foxtag.write_from_top())
+        outfile.write(doc.write_from_top())
         outfile.write("".join(err_str_list))
 
 
@@ -93,4 +96,4 @@ def boot_form(form_name='form'):
 
         
 if __name__ == "__main__":
-    boot_form()
+    boot_table()

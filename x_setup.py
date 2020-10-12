@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-This is a utility designed to eliminame the discord of import in foxutils.
+This is a utility designed to eliminame the discord of imports in foxutils.
 
 How it works:
 Basically creates/updates a file "x_foxport.py" in every subfolder, which is then subsequently imported by the scripts themselves.

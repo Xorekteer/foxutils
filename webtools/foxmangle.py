@@ -1,10 +1,12 @@
 if False:   # VS code linting trick
     import foxlaff
     import foxre
+
+# Real imports
 import x_foxport    # appends foxutils root to path
                     # doesn't activate VS code linting
 import foxutils.foxlaff as foxlaff
-import foxutils.foxre as foxre
+import foxutils.foxre   as foxre
 
 import os
 import re

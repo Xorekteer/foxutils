@@ -55,7 +55,6 @@ def mangle_all_snek(recursive=False):
     else:
         filenames_here = foxlaff.load_all_from_folder( os.getcwd() )
     
-    filenames_here = foxlaff.load_all_from_folder( os.getcwd() )
     html_filenames = foxre.relist("\.py", filenames_here)
     for filename in html_filenames:
         result_lines  = list()

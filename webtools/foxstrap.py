@@ -96,4 +96,4 @@ def boot_form(form_name='form'):
 
         
 if __name__ == "__main__":
-    boot_table()
+    boot_form()

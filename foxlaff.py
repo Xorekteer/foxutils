@@ -26,7 +26,11 @@ def load_all_from_folder(folder):
 
 def folder_recursion(current_root, storage_list, include_root=True):
     """
-    Fills storage_list with the absolute paths of folders traversed down recursively from current_root.
+    Direct calls obsolete.
+    Use list_subfolders.recursively instead.
+    
+    Fills storage_list with the absolute paths of folders 
+    traversed down recursively from current_root.
     Folders starting with . or _ are ignored.
 
     Params:
@@ -59,14 +63,39 @@ def folder_recursion(current_root, storage_list, include_root=True):
 def list_subfolders_recursively(root, include_root=True):
     """
     Returns a list of all subfolders obtained recursively.
+    Writes absolute paths.
     
     This function is just a wrapper around folder_recursion to allow simple x=fun(y) usage.
 
     Params:
-    root {str}                  --  path of top level folder
-    include_root=True {bool}    --  should root be written to the list?
+        root {str}                  --  path of top level folder
+        include_root=True {bool}    --  should root folder be written to the list?
+
+    Returns:
+        {list of strings}           -- absolute paths of all subfolders
     """
     lst = list()
     folder_recursion(root, lst, include_root=include_root)
     return lst
 
+def list_files_recursively(root, include_root=True):
+    """
+    Returns a list of all files within subfolders.
+    
+    Params:
+        root {str}                  --  path of top level folder
+        include_root=True {bool}    --  should contents of root folder be written?
+
+    Returns:
+        {list of strings}           -- absolute paths of files within subfolders
+    """
+    lst = list()
+    subfolders = list_subfolders_recursively(root, include_root)
+    for folder in subfolders:
+        file_candidates = os.listdir(folder)    # contains relative paths
+        file_candidates = [os.path.join(folder, relname) for relname in file_candidates]
+                                                # the paths are now absolute
+        for file_candidate in file_candidates:
+            if os.path.isfile(file_candidate):
+                lst.append(file_candidate)
+    return lst

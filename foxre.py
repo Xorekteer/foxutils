@@ -40,6 +40,36 @@ def relist(re_str, in_list):
     return newlist
     
 
+def get_indices(re_str, in_list):
+    """
+    Filters a list using a regex pattern. 
+    The incides of the elements that weren't completely rejected are returned as a list
+    
+    Args:
+        re_str {string}             -- regex pattern to be compiled
+        in_list {list of strings}   -- list to be filtered 
+    
+    Returns:
+        {list of ints}              -- indices of the list elements that weren't rejected under the pattern
+    """
+    indices = []
+    matches = relist(re_str ,in_list)
+    for match in matches:
+        added = False  # REDUNDANT
+        for i in range(len(in_list)):
+            if in_list[i] == match and i not in indices:  # works even if list elements are repeated
+                indices.append(i)
+                added = True   # REDUNDANT
+                break   # exit from range loop, to avoid adding a match
+                        # multiple times
+        if added:   # REDUNDANT
+            continue
+        else:   # REDUNDANT
+            print("Error: match found by regex but not by index finder.")   # REDUNDANT
+    return indices
+
+
+
 def reword(re_str="", in_str=""):
     """Returns words from a string that aren't rejected by regex.
 

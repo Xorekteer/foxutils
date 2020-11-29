@@ -102,5 +102,37 @@ class TestRelist(unittest.TestCase):
             self.ex1
         )
 
+class TestGetIndices(unittest.TestCase):
+    def setUp(self):
+        self.ex1 = [
+            "The",
+            "quick",
+            "brown",
+            "python",
+            "slid",
+            "under",
+            "the",
+            "jumpy",
+            "fox.",
+            "the",
+            "fill"
+        ]
+
+    def test_get_indices(self):
+        self.assertEqual(
+            foxre.get_indices(r"py", self.ex1),
+            [3, 7]
+        )
+        self.assertEqual(
+            foxre.get_indices(r"(T|t)he", self.ex1),
+            [0, 6, 9]
+        )
+        # Empty is all
+        self.assertEqual(
+            foxre.get_indices(r"", self.ex1),
+            list(range(len(self.ex1)))
+        )
+
+
 if __name__ == "__main__":
     unittest.main()

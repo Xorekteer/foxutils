@@ -21,13 +21,7 @@ def mangle_all_html(recursive=False):
     """
     Removes all lines that are empty or contain comments from all htmls within the current folder.
     """
-    if recursive:
-        subfolders     = foxlaff.list_subfolders_recursively(os.getcwd(), include_root=True)
-        filenames_here = [foxlaff.load_all_from_folder( folder ) for folder in subfolders]
-        filenames_here = foxcast.flatten_iterable(filenames_here)
-    else:
-        filenames_here = foxlaff.load_all_from_folder( os.getcwd() )
-    
+    filenames_here = foxlaff.list_files_recursively(os.getcwd(), include_root=True)
     html_filenames = foxre.relist("\.html", filenames_here)
     for filename in html_filenames:
         result_lines  = list()
@@ -48,15 +42,9 @@ def mangle_all_snek(recursive=False):
     """
     Removes all lines containing only whitespace or # comments from all python files within current folder.
     """
-    if recursive:
-        subfolders     = foxlaff.list_subfolders_recursively(os.getcwd(), include_root=True)
-        filenames_here = [foxlaff.load_all_from_folder( folder ) for folder in subfolders]
-        filenames_here = foxcast.flatten_iterable(filenames_here)
-    else:
-        filenames_here = foxlaff.load_all_from_folder( os.getcwd() )
-    
-    html_filenames = foxre.relist("\.py", filenames_here)
-    for filename in html_filenames:
+    filenames_here = foxlaff.list_files_recursively(os.getcwd(), include_root=True)
+    py_filenames = foxre.relist("\.py", filenames_here)
+    for filename in py_filenames:
         result_lines  = list()
         with open(filename, 'r') as current_file:   # open for reading
             content_lines = current_file.readlines()

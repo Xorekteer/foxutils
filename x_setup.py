@@ -1,15 +1,26 @@
 #!/usr/bin/env python3
 
 """
-This is a utility designed to eliminame the discord of imports in foxutils.
+This is a utility designed to eliminame the discord of imports in foxutils and openfox.
 
 How it works:
 Basically creates/updates a file "x_foxport.py" in every subfolder, which is then subsequently imported by the scripts themselves.
+
+------
+
+Usage:
+
 Run this script every time foxutils is moved.
-If a script is used by copying, make sure to copy an "x_foxport.py" along with it.
+
+If a foxutils script is used by copying (shouldn't be necessary btw), make sure to copy an "x_foxport.py" along with it.
 This way a script within this library can refer to another script within this library without
 making assumptions about its own path.
 
+Also: since this generates import sys for all parent folders, those also become usable. Specifically the parent folder of foxutils is imported, MAKE SURE THERE ARE NO NAME-CLASHES.
+
+Requirements: foxlaff
+
+------
 
 may the fox be with you
 

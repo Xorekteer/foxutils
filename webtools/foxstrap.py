@@ -53,21 +53,27 @@ def boot_form(form_name='form'):
     doc = foxtag.Document()
     
     # outer <form>
-    root = foxtag.Elem(tag='form', attrs='method="POST" action=""', document=doc)
+    root = foxtag.Elem(tag='form', attrs='method="POST" action="" class="form-group"', document=doc)
     # starting hidden_tag
     root.inner_html = r"{{form.hidden_tag()}}"
     # repetitive rows/cols
     for row_index in range(len(in_array)):
-        row_child = root.add_child(tag='div', attrs='class="row"')
-        
         label   = "{{" + form_name + "." + in_array[row_index][0] + ".label" + "}}"
         field   = "{{" + form_name + "." + in_array[row_index][0] + "}}"
-        row_child.add_child(tag='div', attrs='class=col', inner_html=label)
-        row_child.add_child(tag='div', attrs='class=col', inner_html=field)
+
+        row_child = root.add_child(tag='div', attrs='class="row"')        
+        row_child.add_child(tag='div', attrs='class="col-1"', inner_html=label)
+        
+        second_row_child = root.add_child(tag='div', attrs='class="row"')
+        second_row_child.add_child(tag='div', attrs='class="col-3 dark-form"', inner_html=field)
+        
     # submit field in a container
-    submit_div_child = root.add_child(
+    
+    submit_div_row = root.add_child(tag='div', attrs='class="row"')
+    
+    submit_div_child = submit_div_row.add_child(
         tag='div',
-        attrs='class=container style="float:left;"',
+        attrs='class="col"',
         inner_html='{{ form.submit }}'        
         )
         
@@ -76,7 +82,7 @@ def boot_form(form_name='form'):
         variable = in_array[row_index][0]
         err_str = (
             f"<!-- Errors in {variable}  -->\n"
-            f"{{% if form.username.errors %}}\n"
+            f"{{% if form.{variable}.errors %}}\n"
             f"    <span> Errors in {variable}: </span> <br>\n"
             f"    {{% for error in form.{variable}.errors %}}\n"
             f'        <div class="alert alert-secondary">\n'
